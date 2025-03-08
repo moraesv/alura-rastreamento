@@ -24,7 +24,8 @@ COPY ${OLTP} opentelemetry-javaagent.jar
 # Define Timezone
 RUN ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 
-RUN apt install curl -y
+# Instala o curl
+RUN apt update && apt install -y curl && rm -rf /var/lib/apt/lists/*
 
 # Comando de inicialização
 CMD ["java", "-Xms256M", "-Xmx256M", "-XX:MetaspaceSize=128m", "-XX:MaxMetaspaceSize=256m", "-javaagent:opentelemetry-javaagent.jar", "-jar", "api-cursos.jar"]

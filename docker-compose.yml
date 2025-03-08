@@ -155,3 +155,14 @@ services:
       - monit
     depends_on:
       - collector-api-cursos
+
+  client-api-cursos:
+    build:
+      context: ./client/
+      dockerfile: Dockerfile
+    container_name: client-api-cursos
+    restart: unless-stopped
+    networks:
+      - public
+    depends_on:
+      - jaeger-api-cursos
